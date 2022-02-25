@@ -1,0 +1,64 @@
+ {% extends 'layout.html' %}
+{% block body %}
+        <div class="content" style="padding-left: 25%;padding-right: 10%">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card ">
+                        <div class="card-header">
+                            <h4 class="card-title"> Trips Table</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table style="box-sizing: border-box;" class="table " >
+                                <thead class=" text-primary">
+                                <tr>
+                                    <th>
+                                        Trip ID
+                                    </th>
+                                    <th>
+                                        Date
+                                    </th>
+                                    <th>
+                                        Map
+                                    </th>
+                                    <th>
+                                        Evaluation
+                                    </th>
+                                </tr>
+
+
+                                    {% for t in trips %}
+
+
+                                        <tr>
+
+
+                                            <th >
+
+                                                {{ t }}
+
+
+                                            </th>
+                                            <th>
+                                                {{ t}}
+
+                                            </th>
+                                            <th>
+
+
+                                                <button type="button"
+                                                        onclick="window.open('/map/user/{{ t }}/{{ t }}', '_blank')"
+                                                class="btn btn-primary">View your trip
+                                                </button>
+                                            </th>
+                                            <th>
+                                                <button type="button"
+                                                        onclick="window.open('/line/user/{{ t}}/{{ t }}', '_blank')"
+                                                        class="btn btn-default">Evaluate your trip
+                                                </button>
+                                            </th>
+
+
+                                        </tr>
+                                    {% endfor %}
+{% endblock %}

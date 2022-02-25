@@ -1,0 +1,141 @@
+<head>
+    <meta charset="utf-8"/>
+    <title>{{ title }}</title>
+    <link rel="shortcut icon" href="/sharebooksfichier_.png">
+    <link rel="stylesheet" href="style.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.0.0/Chart.bundle.js">
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+</head>
+{% include 'includes/_navbar.html' %}
+<body>
+
+
+<div class="row ">
+    <div class="col">
+        <center>
+            <h2>{{ ngrams.title() }}</h2>
+
+            <canvas id="myChart" width="1235" height="750"></canvas>
+            <br>
+            {% for y in t %}
+                <a href="{{ url_for('line1', form=ngrams ,corpus=corpus,deb=deb,end=end,id=y) }}">
+                    <button name="button" value="OK" type="button" class="btn btn-info">{{ labels[y] }}</button>
+                </a>
+            {% endfor %}
+
+        </center>
+    </div>
+    <div class="col" >
+
+        <div class="card bg-light" style="border-radius: 30px;width:382px">
+            <center>
+                <img class="card-img-top bg-light" src="{{ img }}" alt="Card image cap"
+                     style="width: 250px;height: 310px">
+                <div class="card-body">
+                    <h5 class="card-title bg-light">{{ ngrams }}</h5>
+                    <a href="https://www.imdb.com/title/{{ imdb }}/">
+                        <button name="button" value="OK" type="button" class="btn btn-warning">IMDB</button>
+                    </a>
+                    <ul class="list-group list-group-flush bg-light">
+                        <li class="list-group-item bg-light"><b>Authors</b>
+                        <p>{{ author }}</p>
+                        </li>
+                        <li class="list-group-item bg-light"><b>Genres</b>
+                        <p>{{ genre }}</p>
+                        </li>
+                        <li class="list-group-item bg-light"><b>Description</b></li>
+                    </ul>
+
+                    <p class="card-text">{{ desc }}</p>
+                </div>
+
+                <div class="card-body">
+
+
+                    <a href="#" class="card-link">Another link</a>
+                </div>
+            </center>
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+    steps = 10
+    max =
+    {{ max }}
+
+
+    var originalLineDraw = Chart.controllers.line.prototype.draw;
+    Chart.helpers.extend(Chart.controllers.line.prototype, {
+        draw: function () {
+            originalLineDraw.apply(this, arguments);
+
+            var chart = this.chart;
+            var ctx = chart.chart.ctx;
+
+            var index = chart.config.data.lineAtIndex;
+            if (index) {
+                var xaxis = chart.scales['x-axis-0'];
+                var yaxis = chart.scales['y-axis-0'];
+
+                ctx.save();
+                ctx.beginPath();
+                ctx.moveTo(xaxis.getPixelForValue(undefined, index), yaxis.top);
+                ctx.strokeStyle = 'black';
+
+                ctx.lineTo(xaxis.getPixelForValue(undefined, index), yaxis.bottom);
+                ctx.stroke();
+                ctx.restore();
+            }
+        }
+    });
+
+
+    var config = {
+        type: 'line',
+        data: {
+            labels: {{ labels | safe }},
+            datasets: [
+
+                {
+                    label: 'courbe des mentions dans les sources imprimées',
+                    data: {{ values | safe }},
+                    fill: false,
+
+                    borderColor: '#2B5C67',
+                    strokeColor: '#2B5C67',
+                    pointColor: '#2B5C67',
+                    pointHighlightStroke: '#2B5C67',
+                    pointHoverBackgroundColor: '#2B5C67',
+                    pointBorderWidth: 0,
+                    pointHoverRadius: 0,
+                    pointHoverBorderWidth: 0,
+                    pointRadius: 0,
+
+                    titleFontColor: '#333',
+                    bodyFontColor: '#666',
+
+                }],
+            lineAtIndex: {{x}}
+        },
+        options: {
+            responsive: false,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    }
+    var ctx = document.getElementById("myChart").getContext("2d");
+
+    new Chart(ctx, config);
+</script>
+</body>
+</html>
