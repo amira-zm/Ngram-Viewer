@@ -138,22 +138,20 @@ def line(form,corpus,deb,end):
         if element not in resultantList:
             resultantList.append(element)
     print(resultantList)
-
+    resultantList.sort()
     return render_template('line_chart.html', title='Sharbooks Ngram', d=d,max=max_value, labels=values,values=labels,ngrams=ngrams[0],t=resultantList,corpus=corpus,deb=deb,end=end,img=img,desc=desc,author=author,genre=genre,imdb=imdb)
 
 @app.route('/line/<string:form>/<string:corpus>/<string:deb>/<string:end>/<string:id>')
 
 def line1(form,corpus,deb,end,id):
     list_date = []
-    list_poster=[]
-    list_overview=[]
     poster_path = "https://image.tmdb.org/t/p/original/"
     date = "1800-01-15"
     desc = ''
     author = ''
     img = ''
     genre = ''
-    d = {}
+    d = dict()
     imdb = []
     ch = form.replace(" ", "") + "-" + corpus + "-" + deb + "-" + end + "-3-caseSensitive.csv"
     fin = open(ch, 'r')
@@ -184,12 +182,10 @@ def line1(form,corpus,deb,end,id):
     ind = 0
     for i in range(len(df)):
         chaine = df.iloc[i, 1][4:]
-        d1 = {}
+        d1 = dict()
         if (form.title() == chaine.title()):
             print(form.title(), chaine.title())
             date = df.iloc[i, 2][4:]
-            poster = (df.iloc[i, 17][4:])
-            overview = (df.iloc[i, 18][4:])
             print(date)
 
             datem = datetime.datetime.strptime(date, "%Y-%m-%d")
@@ -200,8 +196,6 @@ def line1(form,corpus,deb,end,id):
             print(datem.year, '++++++++++', deb, '+++++++++++', end)
             if (int(datem.year) <= int(end) and int(datem.year) >= int(deb)):
                 list_date.append(x)
-                list_poster.append(poster)
-                list_overview.append(overview)
                 print(list_date)
             print("liiiiiiiiiiiiiiiiiiiiiiiiiiiiiiste", list_date)
             desc = (df.iloc[i, 14][4:])
@@ -219,18 +213,14 @@ def line1(form,corpus,deb,end,id):
     for i in range(len(labels)):
         labels[i] = (labels[i] * 100) / max_value
     resultantList = []
-    dict= {}
 
-    for i in range(len(list_date)):
-        dicti = {}
-        if list_date[i] not in resultantList:
-            resultantList.append(list_date[i])
-            dicti["poster"]=list_poster[i]
-            dicti["overview"] =list_overview[i]
-            dict[list_date[i]]=dicti
+    for element in list_date:
+
+        if element not in resultantList:
+            resultantList.append(element)
+    resultantList.sort()
     print(resultantList)
-
-    return render_template('line_chart1.html', dict=dict,title='Sharbooks Ngram',d=d, max=max_value, labels=values,
+    return render_template('line_chart1.html',title='Sharbooks Ngram',d=d, max=max_value, labels=values,
                            values=labels,ngrams=ngrams[0],x=id,t=resultantList,corpus=corpus,deb=deb,end=end,desc=desc,img=img,author=author,genre=genre,imdb=imdb)
 
 

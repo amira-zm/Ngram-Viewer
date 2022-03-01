@@ -26,35 +26,53 @@
 <div class="row ">
 <div class="col">
 
-<nav id="sidebar" class="img" style="background-image: url({{ url_for('static', filename='assets/images/bg_1.jpg') }}); height: 100%;">
-    <div class="p-4">
+
+<nav id="sidebar" class="img" style="background-image: url({{ url_for('static', filename='assets/images/bg_1.jpg') }});max-width: 100%;min-width: 80%">
+    <div class="p-3">
 
         <ul class="list-unstyled components mb-5">
             <li class="active">
-                <a href="{{ url_for("index") }}"><span class="fa fa-home mr-3"></span> Home</a>
+                <a href="{{ url_for("index") }}" style="font-size: large"><img src="https://img.icons8.com/ios-filled/50/ffffff/foreclosure.png" height="33" width="33" /></span> <b style="padding-left: 20px">Home</b></a>
             </li>
             <li>
-                <a href="https://sharebooks.fr/"><span class="fa fa-user mr-3" ></span> Sharebooks Website </a>
+                <a href="https://sharebooks.fr/" style="font-size: large"><img src="https://img.icons8.com/ios-filled/50/ffffff/internet.png"  height="33" width="33"/><b style="padding-left: 20px"> Sharebooks Website </b></a>
             </li>
             <li>
-                <a href="https://sharebooks-app.fr/"><span class="fa fa-plane mr-3"></span> Sharebooks App</a>
+                <a href="https://sharebooks-app.fr/" style="font-size: large"><img src="https://img.icons8.com/ios-filled/50/ffffff/broken-phone.png" height="33" width="33"/><b style="padding-left: 20px"> Sharebooks App</b></a>
             </li>
             <li>
-                <a href="{{ url_for("fovorite") }}"><span class="fa fa-sticky-note mr-3"></span> The Most Searched</a>
+                <a href="{{ url_for("fovorite") }}" style="font-size: large"><img src="https://img.icons8.com/ios-filled/50/ffffff/novel--v1.png" height="33" width="33"/><b style="padding-left: 20px"> The Most Searched </b></a>
             </li>
             <li>
-                <a href="#"><span class="fa fa-cogs mr-3"></span> Sharebooks Predictif</a>
+                <a href="#" style="font-size: large"><span class="fa fa-cogs mr-3" ></span> <b style="padding-left: 20px"> Sharebooks Predictif </b></a>
             </li>
 
+            <li class="row">
+
+                <a class="col" href="https://www.facebook.com/sharebooks.off"> <img
+                        src="https://img.icons8.com/ios-filled/50/ffffff/facebook-new.png" width="38px"height="38px"/></a>
+
+                <a class="col" href="https://www.facebook.com/sharebooks.off"> <img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new--v1.png" width="38px"height="38px"/></a>
+
+
+
+
+
+
+
+                <center>
+                <a  href="https://www.facebook.com/sharebooks.off"> <img
+                        src="https://img.icons8.com/ios-filled/50/ffffff/facebook-new.png" width="38px"height="38px"/></a>
+                </center>
+            </li>
         </ul>
 
 
         <div class="footer">
             <p>
+
                 Copyright &copy;<script>document.write(new Date().getFullYear());</script>
-                All rights reserved | This template is made  <i class="icon-heart" aria-hidden="true"></i> by <a
-                    href="https://sharebooks.fr target="_blank">Sharebooks.fr</a>
-            </p>
+                All rights reserved
         </div>
 
     </div>
@@ -75,18 +93,20 @@
 
         </center>
     </div>
+
     <div class="col">
-        <div class="container" style="border-radius: 30px;width:382px">
+    <br>
+        <div class="container " style="border-radius: 30px;width:382px">
             <div class="row">
                 <div class="col-6">
-                    <h3 class="mb-3">Books </h3>
+                    <h3 class="mb-3 ">Books </h3>
                 </div>
                 <div class="col-6 text-right">
-                    <a class="btn btn-primary mb-3 mr-1" href="#carouselExampleIndicators2" role="button"
+                    <a class="btn btn-info" href="#carouselExampleIndicators2" role="button"
                        data-slide="prev">
                         <img src="https://img.icons8.com/ios/50/ffffff/long-arrow-left.png" width="40px"/>
                     </a>
-                    <a class="btn btn-primary mb-3 " href="#carouselExampleIndicators2" role="button" data-slide="next">
+                    <a class="btn btn-info" href="#carouselExampleIndicators2" role="button" data-slide="next">
                         <img src="https://img.icons8.com/ios/50/ffffff/long-arrow-right.png" width="40px"/>
                     </a>
                 </div>
@@ -98,7 +118,7 @@
                                 <div class="row">
 
 
-                                    <div class="card">
+                                    <div class="card bg-light">
                                         <center>
                                             <img class="img-fluid" style="width: 250px;height: 310px"
                                                  src="{{ d[0]["img"] }}">
@@ -123,29 +143,29 @@
                                     </div>
                                 </div>
                             </div>
-                            {% for c,y in dict.items() %}
+                            {% for c,y in d.items() %}
                                 {% if c!= 0 %}
                                     <div class="carousel-item">
                                         <div class="row">
 
 
-                                            <div class="card">
+                                            <div class="card  bg-light">
                                                 <center>
                                                     <img class="img-fluid" style="width: 250px;height: 310px"
-                                                         src="{{ "https://image.tmdb.org/t/p/original"+y["poster"] }}">
+                                                         src="{{ y["img"] }}">
                                                 </center>
                                                 <div class="card-body">
                                                     <h4 class="card-title">{{ ngrams }}</h4>
                                                     <ul class="list-group list-group-flush bg-light">
-                                                        <li class="list-group-item bg-light"><b>Overview</b>
-                                                            <p>{{ y["overview"] }}</p>
+                                                        <li class="list-group-item bg-light"><b>Authors</b>
+                                                            <p>{{ y["author"] }}</p>
                                                         </li>
                                                         <li class="list-group-item bg-light"><b>Genres</b>
-                                                            <p>{{ y["poster"] }}</p>
+                                                            <p>{{ y["author"] }}</p>
                                                         </li>
                                                         <li class="list-group-item bg-light"><b>Description</b></li>
                                                     </ul>
-                                                    <p class="card-text">{{ y["poster"] }}</p>
+                                                    <p class="card-text">{{ y["desc"] }}</p>
 
                                                 </div>
 
