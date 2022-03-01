@@ -63,7 +63,7 @@
             </th>
             <th>
 
-                <a href="{{ url_for('line', form=t["ngram"] ,corpus=t["corpus"],deb=t["deb"],end=t["end"]) }}">
+                <a href="{{ url_for('line', form=t["ngram"].lower() ,corpus=t["corpus"],deb=t["deb"],end=t["end"]) }}">
                     <button name="button" value="OK" type="button" class="btn btn-warning">view ngram</button>
                 </a>
             </th>
