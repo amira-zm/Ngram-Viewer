@@ -1,3 +1,5 @@
+<!doctype html>
+<html lang="en">
 <head>
     <meta charset="utf-8"/>
     <title>{{ title }}</title>
@@ -6,12 +8,76 @@
         <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
           integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css"
+          href="{{ url_for('static', filename='assets/css/style.css') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <title>Hello, world!</title>
 </head>
 {% include 'includes/_navbar.html' %}
-<body>
+<body >
 
 
 <div class="row ">
+<div class="col-md" >
+
+<nav id="sidebar" class="img" style="background-image: url({{ url_for('static', filename='assets/images/bg_1.jpg') }});max-width: 100%;min-width: 80%">
+    <div class="p-3">
+
+        <ul class="list-unstyled components mb-5">
+            <li class="active">
+                <a href="{{ url_for("index") }}" style="font-size: large"><img src="https://img.icons8.com/ios-filled/50/ffffff/foreclosure.png" height="33" width="33" /></span> <b style="padding-left: 20px">Home</b></a>
+            </li>
+            <li>
+                <a href="https://sharebooks.fr/" style="font-size: large"><img src="https://img.icons8.com/ios-filled/50/ffffff/internet.png"  height="33" width="33"/><b style="padding-left: 20px"> Sharebooks Website </b></a>
+            </li>
+            <li>
+                <a href="https://sharebooks-app.fr/" style="font-size: large"><img src="https://img.icons8.com/ios-filled/50/ffffff/broken-phone.png" height="33" width="33"/><b style="padding-left: 20px"> Sharebooks App</b></a>
+            </li>
+            <li>
+                <a href="{{ url_for("fovorite") }}" style="font-size: large"><img src="https://img.icons8.com/ios-filled/50/ffffff/novel--v1.png" height="33" width="33"/><b style="padding-left: 20px"> The Most Searched </b></a>
+            </li>
+            <li>
+                <a href="#" style="font-size: large"><span class="fa fa-cogs mr-3" ></span> <b style="padding-left: 20px"> Sharebooks Predictif </b></a>
+            </li>
+
+            <li class="row">
+
+                <a class="col" href="https://www.facebook.com/sharebooks.off"> <img
+                        src="https://img.icons8.com/ios-filled/50/ffffff/facebook-new.png" width="38px"height="38px"/></a>
+
+                <a class="col" href="https://www.facebook.com/sharebooks.off"> <img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new--v1.png" width="38px"height="38px"/></a>
+
+
+
+
+
+
+
+                <center>
+                <a  href="https://www.facebook.com/sharebooks.off"> <img
+                        src="https://img.icons8.com/ios-filled/50/ffffff/facebook-new.png" width="38px"height="38px"/></a>
+                </center>
+            </li>
+        </ul>
+
+
+        <div class="footer">
+            <p>
+
+                Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+                All rights reserved
+        </div>
+
+    </div>
+</nav>
+
+</div>
     <div class="col">
         <center>
             <h2>{{ ngrams.title() }}</h2>
@@ -26,44 +92,100 @@
 
         </center>
     </div>
-    <div class="col" >
 
-        <div class="card bg-light" style="border-radius: 30px;width:382px">
-            <center>
-                <img class="card-img-top bg-light" src="{{ img }}" alt="Card image cap"
-                     style="width: 250px;height: 310px">
-                <div class="card-body">
-                    <h5 class="card-title bg-light">{{ ngrams }}</h5>
-                    <a href="https://www.imdb.com/title/{{ imdb }}/">
-                        <button name="button" value="OK" type="button" class="btn btn-warning">IMDB</button>
+    <div class="col">
+    <br>
+        <div class="container " style="border-radius: 30px;width:382px">
+            <div class="row">
+                <div class="col-6">
+                    <h3 class="mb-3 ">Books </h3>
+                </div>
+                <div class="col-6 text-right">
+                    <a class="btn btn-info" href="#carouselExampleIndicators2" role="button"
+                       data-slide="prev">
+                        <img src="https://img.icons8.com/ios/50/ffffff/long-arrow-left.png" width="40px"/>
                     </a>
-                    <ul class="list-group list-group-flush bg-light">
-                        <li class="list-group-item bg-light"><b>Authors</b>
-                        <p>{{ author }}</p>
-                        </li>
-                        <li class="list-group-item bg-light"><b>Genres</b>
-                        <p>{{ genre }}</p>
-                        </li>
-                        <li class="list-group-item bg-light"><b>Description</b></li>
-                    </ul>
-
-                    <p class="card-text">{{ desc }}</p>
+                    <a class="btn btn-info" href="#carouselExampleIndicators2" role="button" data-slide="next">
+                        <img src="https://img.icons8.com/ios/50/ffffff/long-arrow-right.png" width="40px"/>
+                    </a>
                 </div>
+                <div class="col-12">
+                    <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
 
-                <div class="card-body">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="row">
 
 
-                    <a href="#" class="card-link">Another link</a>
+                                    <div class="card bg-light">
+                                        <center>
+                                            <img class="img-fluid" style="width: 250px;height: 310px"
+                                                 src="{{ d[0]["img"] }}">
+                                        </center>
+                                        <div class="card-body">
+                                            <h4 class="card-title">{{ ngrams }}</h4>
+
+                                            <ul class="list-group list-group-flush bg-light">
+                                                <li class="list-group-item bg-light"><b>Authors</b>
+                                                    <p>{{ d[0]["author"] }}</p>
+                                                </li>
+                                                <li class="list-group-item bg-light"><b>Genres</b>
+                                                    <p>{{ d[0]["author"] }}</p>
+                                                </li>
+                                                <li class="list-group-item bg-light"><b>Description</b></li>
+                                            </ul>
+                                            <p class="card-text">{{ d[0]["desc"] }}</p>
+
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            {% for c,y in d.items() %}
+                                {% if c!= 0 %}
+                                    <div class="carousel-item">
+                                        <div class="row">
+
+
+                                            <div class="card  bg-light">
+                                                <center>
+                                                    <img class="img-fluid" style="width: 250px;height: 310px"
+                                                         src="{{ y["img"] }}">
+                                                </center>
+                                                <div class="card-body">
+                                                    <h4 class="card-title">{{ ngrams }}</h4>
+                                                    <ul class="list-group list-group-flush bg-light">
+                                                        <li class="list-group-item bg-light"><b>Authors</b>
+                                                            <p>{{ y["author"] }}</p>
+                                                        </li>
+                                                        <li class="list-group-item bg-light"><b>Genres</b>
+                                                            <p>{{ y["author"] }}</p>
+                                                        </li>
+                                                        <li class="list-group-item bg-light"><b>Description</b></li>
+                                                    </ul>
+                                                    <p class="card-text">{{ y["desc"] }}</p>
+
+                                                </div>
+
+
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+
+                        </div>
+                    </div>
                 </div>
-            </center>
+            </div>
         </div>
     </div>
-
+    </section>
 </div>
-
-
-
-
+<script type='text/javascript'></script>
 <script>
     steps = 10
     max =
@@ -87,6 +209,7 @@
                 ctx.beginPath();
                 ctx.moveTo(xaxis.getPixelForValue(undefined, index), yaxis.top);
                 ctx.strokeStyle = 'black';
+
                 ctx.lineTo(xaxis.getPixelForValue(undefined, index), yaxis.bottom);
                 ctx.stroke();
                 ctx.restore();
@@ -138,6 +261,16 @@
     new Chart(ctx, config);
 </script>
 
-
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 </body>
 </html>

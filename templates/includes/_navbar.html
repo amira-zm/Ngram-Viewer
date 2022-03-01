@@ -1,20 +1,20 @@
-
-<nav class="navbar navbar-light bg-light" style="border-radius: 30px;height: 80px;margin-left: 10px" >
+<nav class="navbar navbar-light bg-light" style=" box-sizing: border-box;border-radius: 30px;height: 80px;margin-left: 10px;position: relative">
     <a class="navbar-brand">
         <div class="row">
-        <img class="col-" src="https://sharebooks.fr/wp-content/uploads/2021/10/logoprincipal.png" height="35px" width="38px" style="margin-left: 25px"><span class="col-xl"><b
-            style="color: #F6BE00"><b></b> Sharebooks  Ngram viewer</b></span>
-            </div>
+            <img class="col-" src="https://sharebooks.fr/wp-content/uploads/2021/10/logoprincipal.png" height="35px"
+                 width="38px" style="margin-left: 25px"><span class="col-xl" ><b
+                style="color: #F6BE00"><b></b> Sharebooks  Ngram viewer</b></span>
+        </div>
     </a>
 
 
-    <form action="{{ url_for('index') }}" method="POST" class="form-inline" >
-        <select name="deb" method="GET" class="btn btn-info"style="margin-right: 20px;height:60px" >
+    <form action="{{ url_for('index') }}" method="POST" class="form-inline" style="position: relative">
+        <select name="deb" method="GET" class="btn btn-info" style="margin-right: 20px;height:60px">
             {% for j in range (2019,1799,-1) %}
                 <option value="{{ j }}" SELECTED>{{ j }}</option>"
             {% endfor %}
         </select>
-        <select name="fin" method="GET" class="btn btn-info" style=";margin-right: 20px;height:60px">
+        <select name="fin" method="GET" class="btn btn-info" style=";margin-right: 20px;height:60px ">
             {% for i in range (1800,2020) %}
                 <option value="{{ i }}" SELECTED>{{ i }}</option>"
             {% endfor %}
@@ -47,106 +47,10 @@
 
         </select>
 
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="nom"  style="height:60px">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="nom"
+               style="height:60px">
         <button class="btn btn-warning" type="submit" value="submit" style="height:60px">Search</button>
     </form>
 
 
 </nav>
-  <div class="container-fluid" style="padding-top: 20px ;padding-left: 28px">
-        <div class="row flex-nowrap" style="padding-right: 50px">
-            <div class="col-auto  bg-light " style="border-radius: 30px;width:300px ;">
-                <div class="d-flex flex-column   text-white min-vh-100">
-
-                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center " id="menu">
-                        <br>
-                        <li class="nav-item" style="text-align: center">
-
-                                <a href="/">
-
-                                    <button name="button" type="button" class="btn btn-info"
-                                            style="width: 260px;height:60px ;border-radius: 12px;"><div class="row"> <img class="col-" src="https://img.icons8.com/ios-filled/50/ffffff/booking.png" height ="35" width="35" style="margin-left: 10px" /><p class="col-xl"><b>Home</b> </p>
-                                    </div></button>
-                                </a>
-
-                            </li>
-                        <br>
-<center>
-
-                            <li class="nav-item" >
-
-                                <a href="https://sharebooks.fr/">
-
-                                    <button name="button" type="button" class="btn btn-info"
-                                            style="width: 260px;height:60px ;border-radius: 12px;">
-                                        <div class="row">
-                                            <img class="col-" src="https://img.icons8.com/ios-filled/50/ffffff/internet.png" height="33" width="33" style="margin-left: 10px"/> <p class="col-xl"> <b>Sharebooks Website</b></p> </div></button>
-                                </a>
-
-                            </li>
-                        <br>
-                         <li class="nav-item" style="text-align: center">
-
-                                <a href="https://sharebooks-app.fr/">
-
-                                    <button name="button" type="button" class="btn btn-info"
-                                            style="width: 260px;height:60px ;border-radius: 12px;"><div class="row"> <img class="col-"  src="https://img.icons8.com/material-outlined/24/ffffff/iphone--v1.png" height ="35" width="35" style="margin-left: 10px" /><p class="col-xl"><b>Sharebooks Mobile App</b> </p>
-                                    </div></button>
-                                </a>
-
-                            </li>
-     <br>
-                         <li class="nav-item" style="text-align: center">
-
-                                <a href="https://sharebooks-app.fr/">
-
-                                    <button name="button" type="button" class="btn btn-info"
-                                            style="width: 260px;height:60px ;border-radius: 12px;"> <div class="row"><img class="col-" src="https://img.icons8.com/ios-filled/50/ffffff/laptop-metrics.png" height ="35" width="35" style="margin-left: 10px"/><p class="col-xl"><b>Predictif Algorithm</b></p>
-                                    </div></button>
-                                </a>
-
-                            </li>
-    <br>
-                         <li class="nav-item" style="text-align: center">
-
-                                <a href="/favorite">
-
-                                    <button name="button" type="button" class="btn btn-info"
-                                            style="width: 260px;height:60px ;border-radius: 12px;"><div class="row"> <img class="col-"  src="https://img.icons8.com/ios-filled/50/ffffff/novel.png" height ="35" width="35" style="margin-left: 10px" /><p class="col-xl"><b>Favorite list </b> </p>
-                                    </div></button>
-                                </a>
-
-                            </li>
-     <br>
-
-
-                            <li>
-                                <div class="row" style="margin-top: 40px">
-
-                        <a href="https://www.linkedin.com/company/sharebooks/" class="col" id="dropdownUser1"
-                           data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="data:image/png;base64,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"
-                                 alt="hugenerd" width="45" height="45" style="border-radius: 15px">
-
-                        </a>
-                        <a href="https://www.facebook.com/sharebooks.off" class="col" id="dropdownUser1"
-                           data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Facebook-icon-1.png/640px-Facebook-icon-1.png"
-                                 alt="hugenerd" width="45" height="45" style="border-radius: 15px">
-
-                        </a>
-                        <a href="https://www.instagram.com/sharebooks_off/?hl=fr" class="col" id="dropdownUser1"
-                           data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/2048px-Instagram_icon.png" alt="hugenerd" width="45" height="45" style="border-radius: 15px">
-
-                        </a>
-
-
-                    </div>
-                            </li>
-                        </center>
-                            </ul>
-
-
-                </div>
-            </div>
