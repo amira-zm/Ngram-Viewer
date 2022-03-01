@@ -17,7 +17,7 @@ from csv import writer
 @app.route('/',methods=['GET','POST'])
 def index():
     if request.method == 'POST':
-        form = request.form["nom"]
+        form = request.form["nom"].lower()
         corpus =request.form["pets"]
         deb=request.form["deb"]
         end=request.form["fin"]
