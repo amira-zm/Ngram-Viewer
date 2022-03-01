@@ -49,8 +49,7 @@ def index():
 def fovorite():
     events= pd.read_csv ('event.csv')
 
-    rec=events.groupby(events.columns.tolist()).size().reset_index(). \
-        rename(columns={0: 'records'})
+    rec=events.groupby(events.columns.tolist()).size().reset_index().rename(columns={0: 'records'})
     records = rec.head(10)
     records.to_csv("ev.csv")
 
