@@ -1,44 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
-<link rel="stylesheet" type="text/css"
-href="{{url_for('static', filename='assets/css/style.css')}}">
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="{{ url_for('static', filename='assets/css/style.css') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta charset="UTF-8">
     <title>{% block title %} Sharebooks Ngram {% endblock %}</title>
 </head>
 
 
-<body class="img" style="background-image: url({{ url_for('static', filename='assets/images/bg_2.jpg') }})">
-<div class="row" style="height: 100%">
-    <div class="col  col-lg-2" style="height: 100%" >
+<body class="bg-light">
+<div class="row">
+    <div class="col col-lg-2">
         {% include 'includes/_sidebar.html' %}
     </div>
-    <div class="col" style="height: 100% ;width: 100%" >
-    <div class="row justify-content-md-center" >
-    {% include 'includes/_navbar.html' %}
-    </div>
-<div class="row justify-content-md-center" style=" padding-top: 8%; padding-left:5%;height: 100% ;width: 100%">
+    <div class="col">
+
+
+        {% include 'includes/_navbar.html' %}
+<br>
+    <br>
+
         {% block body %}
 
-     {% endblock %}
-</div>
-    </div>
-</div>
+        {% endblock %}
 
+
+    </div>
+
+</div>
 </body>
 
 
-
-
-
-
- <script src="C:\Users\AMIRA\PycharmProjects\flaskProject3\static\assets\js\jquery.min.js"></script>
-    <script src="C:\Users\AMIRA\PycharmProjects\flaskProject3\static\assets\js\popper.js"></script>
-    <script src="C:\Users\AMIRA\PycharmProjects\flaskProject3\static\assets\js\bootstrap.min.js"></script>
-    <script src="C:\Users\AMIRA\PycharmProjects\flaskProject3\static\assets\js\main.js"></script>
+<script src="C:\Users\AMIRA\PycharmProjects\flaskProject3\static\assets\js\jquery.min.js"></script>
+<script src="C:\Users\AMIRA\PycharmProjects\flaskProject3\static\assets\js\popper.js"></script>
+<script src="C:\Users\AMIRA\PycharmProjects\flaskProject3\static\assets\js\bootstrap.min.js"></script>
+<script src="C:\Users\AMIRA\PycharmProjects\flaskProject3\static\assets\js\main.js"></script>
 
 
 </html>
