@@ -19,67 +19,19 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
     <title>Hello, world!</title>
 </head>
-{% include 'includes/_navbar.html' %}
+
 <body >
 
 
 <div class="row ">
-<div class="col">
-
-
-<nav id="sidebar" class="img" style="background-image: url({{ url_for('static', filename='assets/images/bg_1.jpg') }});max-width: 100%;min-width: 80%">
-    <div class="p-3">
-
-        <ul class="list-unstyled components mb-5">
-            <li class="active">
-                <a href="{{ url_for("index") }}" style="font-size: large"><img src="https://img.icons8.com/ios-filled/50/ffffff/foreclosure.png" height="33" width="33" /></span> <b style="padding-left: 20px">Home</b></a>
-            </li>
-            <li>
-                <a href="https://sharebooks.fr/" style="font-size: large"><img src="https://img.icons8.com/ios-filled/50/ffffff/internet.png"  height="33" width="33"/><b style="padding-left: 20px"> Sharebooks Website </b></a>
-            </li>
-            <li>
-                <a href="https://sharebooks-app.fr/" style="font-size: large"><img src="https://img.icons8.com/ios-filled/50/ffffff/broken-phone.png" height="33" width="33"/><b style="padding-left: 20px"> Sharebooks App</b></a>
-            </li>
-            <li>
-                <a href="{{ url_for("fovorite") }}" style="font-size: large"><img src="https://img.icons8.com/ios-filled/50/ffffff/novel--v1.png" height="33" width="33"/><b style="padding-left: 20px"> The Most Searched </b></a>
-            </li>
-            <li>
-                <a href="#" style="font-size: large"><span class="fa fa-cogs mr-3" ></span> <b style="padding-left: 20px"> Sharebooks Predictif </b></a>
-            </li>
-
-            <li class="row">
-
-                <a class="col" href="https://www.facebook.com/sharebooks.off"> <img
-                        src="https://img.icons8.com/ios-filled/50/ffffff/facebook-new.png" width="38px"height="38px"/></a>
-
-                <a class="col" href="https://www.facebook.com/sharebooks.off"> <img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new--v1.png" width="38px"height="38px"/></a>
-
-
-
-
-
-
-
-                <center>
-                <a  href="https://www.facebook.com/sharebooks.off"> <img
-                        src="https://img.icons8.com/ios-filled/50/ffffff/facebook-new.png" width="38px"height="38px"/></a>
-                </center>
-            </li>
-        </ul>
-
-
-        <div class="footer">
-            <p>
-
-                Copyright &copy;<script>document.write(new Date().getFullYear());</script>
-                All rights reserved
-        </div>
-
+<div class="col  col-lg-2" style="height: 100%" >
+        {% include 'includes/_sidebar.html' %}
     </div>
-</nav>
+    <div class="col" style="height: 100% ;width: 100%" >
+    <div class="row justify-content-md-center" >
+    {% include 'includes/_navbar.html' %}
 
-</div>
-    <div class="col">
+    <div class="col-md" style="padding-top: 6%">
         <center>
             <h2>{{ ngrams.title() }}</h2>
 
@@ -94,7 +46,7 @@
         </center>
     </div>
 
-    <div class="col">
+    <div class="col" style="padding-top: 6%">
     <br>
         <div class="container " style="border-radius: 30px;width:382px">
             <div class="row">

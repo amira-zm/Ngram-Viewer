@@ -10,16 +10,21 @@ href="{{url_for('static', filename='assets/css/style.css')}}">
     <title>{% block title %} Sharebooks Ngram {% endblock %}</title>
 </head>
 
-{% include 'includes/_navbar.html' %}
+
 <body class="img" style="background-image: url({{ url_for('static', filename='assets/images/bg_2.jpg') }})">
 <div class="row" style="height: 100%">
-    <div class="col-md" style="height: 100%" >
+    <div class="col  col-lg-2" style="height: 100%" >
         {% include 'includes/_sidebar.html' %}
     </div>
-    <div class="col-xl-10" style="height: 100%">
+    <div class="col" style="height: 100% ;width: 100%" >
+    <div class="row justify-content-md-center" >
+    {% include 'includes/_navbar.html' %}
+    </div>
+<div class="row justify-content-md-center" style=" padding-top: 8%; padding-left:5%;height: 100% ;width: 100%">
         {% block body %}
 
      {% endblock %}
+</div>
     </div>
 </div>
 

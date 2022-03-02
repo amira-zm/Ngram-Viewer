@@ -8181,14 +8181,12 @@ h1, h2, h3, h4, h5,
 }
 
 #sidebar {
-height: 100%;
-  min-width: 80%;
-  max-width:100%;
+
   color: #fff;
   -webkit-transition: all 0.3s;
   -o-transition: all 0.3s;
   transition: all 0.3s;
-  position: relative;
+  position: fixed;
   z-index: 0; }
   #sidebar:after {
     position: absolute;
