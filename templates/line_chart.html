@@ -20,46 +20,47 @@
     <title>Hello, world!</title>
 </head>
 
-<body class="bg-light" >
+<body class="bg-light">
 
 
-<div class="row ">
-<div class="col  col-lg-2" style="height: 100%" >
-        {% include 'includes/_sidebar.html' %}
+<div class="row" style="padding-left: 2%">
+
+    <div class="col" style="padding-top: 1.5%">
+        <div class="card">
+            <center>
+                <h2>{{ ngrams.title() }}</h2>
+
+                <canvas id="myChart" width="1235" height="750"></canvas>
+
+                {% for y in t %}
+                    <a href="{{ url_for('line3', form=ngrams ,corpus=corpus,deb=deb,end=end,id=y) }}">
+                        <button name="button" value="OK" type="button" class="btn btn-info">{{ labels[y] }}</button>
+                    </a>
+                {% endfor %}
+
+            </center>
+
+
+        </div>
+
     </div>
-    <div class="col" style="height: 100% ;width: 100%" >
-    <div class="row justify-content-md-center" >
-    {% include 'includes/_navbar.html' %}
 
-    <div class="col-md" style="padding-top: 6%">
-        <center>
-            <h2>{{ ngrams.title() }}</h2>
-
-            <canvas id="myChart" width="1235" height="750"></canvas>
-            <br>
-            {% for y in t %}
-                <a href="{{ url_for('line1', form=ngrams ,corpus=corpus,deb=deb,end=end,id=y) }}">
-                    <button name="button" value="OK" type="button" class="btn btn-info">{{ labels[y] }}</button>
-                </a>
-            {% endfor %}
-
-        </center>
-    </div>
-
-    <div class="col" style="padding-top: 6%">
-    <br>
-        <div class="container " style="border-radius: 30px;width:382px">
+    <div class="col">
+        <br>
+        <div class="container bg-white border" style="width:382px">
             <div class="row">
                 <div class="col-6">
+                    <br>
                     <h3 class="mb-3 ">Books </h3>
                 </div>
                 <div class="col-6 text-right">
+                    <br>
                     <a class="btn btn-info" href="#carouselExampleIndicators2" role="button"
                        data-slide="prev">
-                        <img src="https://img.icons8.com/ios/50/ffffff/long-arrow-left.png" width="40px"/>
+                        <img src="https://img.icons8.com/ios/50/ffffff/long-arrow-left.png" width="20px"/>
                     </a>
                     <a class="btn btn-info" href="#carouselExampleIndicators2" role="button" data-slide="next">
-                        <img src="https://img.icons8.com/ios/50/ffffff/long-arrow-right.png" width="40px"/>
+                        <img src="https://img.icons8.com/ios/50/ffffff/long-arrow-right.png" width="20px"/>
                     </a>
                 </div>
                 <div class="col-12">
@@ -70,22 +71,22 @@
                                 <div class="row">
 
 
-                                    <div class="card bg-light">
+                                    <div class="card bg-white">
                                         <center>
                                             <img class="img-fluid" style="width: 250px;height: 310px"
                                                  src="{{ d[0]["img"] }}">
                                         </center>
-                                        <div class="card-body">
+                                        <div class="card-body bg-white">
                                             <h4 class="card-title">{{ ngrams }}</h4>
 
                                             <ul class="list-group list-group-flush bg-light">
-                                                <li class="list-group-item bg-light"><b>Authors</b>
+                                                <li class="list-group-item bg-white"><b>Authors</b>
                                                     <p>{{ d[0]["author"] }}</p>
                                                 </li>
-                                                <li class="list-group-item bg-light"><b>Genres</b>
-                                                    <p>{{ d[0]["author"] }}</p>
+                                                <li class="list-group-item bg-white"><b>Genres</b>
+                                                    <p>{{ d[0]["genre"] }}</p>
                                                 </li>
-                                                <li class="list-group-item bg-light"><b>Description</b></li>
+                                                <li class="list-group-item bg-white"><b>Description</b></li>
                                             </ul>
                                             <p class="card-text">{{ d[0]["desc"] }}</p>
 
@@ -101,21 +102,22 @@
                                         <div class="row">
 
 
-                                            <div class="card  bg-light">
+                                            <div class="card  bg-white border">
                                                 <center>
+                                                    <br>
                                                     <img class="img-fluid" style="width: 250px;height: 310px"
                                                          src="{{ y["img"] }}">
                                                 </center>
-                                                <div class="card-body">
-                                                    <h4 class="card-title">{{ ngrams }}</h4>
-                                                    <ul class="list-group list-group-flush bg-light">
-                                                        <li class="list-group-item bg-light"><b>Authors</b>
+                                                <div class="card-body bg-white ">
+                                                    <h4 class="card-title bg-white ">{{ ngrams }}</h4>
+                                                    <ul class="list-group list-group-flush bg-white ">
+                                                        <li class="list-group-item bg-white"><b>Authors</b>
                                                             <p>{{ y["author"] }}</p>
                                                         </li>
-                                                        <li class="list-group-item bg-light"><b>Genres</b>
-                                                            <p>{{ y["author"] }}</p>
+                                                        <li class="list-group-item bg-white"><b>Genres</b>
+                                                            <p>{{ y["genre"] }}</p>
                                                         </li>
-                                                        <li class="list-group-item bg-light"><b>Description</b></li>
+                                                        <li class="list-group-item bg-white"><b>Description</b></li>
                                                     </ul>
                                                     <p class="card-text">{{ y["desc"] }}</p>
 
@@ -136,8 +138,9 @@
             </div>
         </div>
     </div>
-    </section>
+
 </div>
+
 <script type='text/javascript'></script>
 <script>
     steps = 10

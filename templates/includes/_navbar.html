@@ -1,56 +1,59 @@
-<nav class="navbar navbar-light bg-white border" style="border-radius: 25px;height: 80px;position:relative;" >
-    <a class="navbar-brand">
+<nav class="navbar navbar-light bg-white border justify-content-between" style="border-radius: 25px;position:relative;">
+
+
         <div class="row">
             <img class="col-" src="https://sharebooks.fr/wp-content/uploads/2021/10/logoprincipal.png" height="35px"
-                 width="38px" style="margin-left: 25px"><span class="col-xl" ><b
+                 width="38px" style="margin-left: 25px"><span class="col-xl"><b
                 style="color: #F6BE00"><b></b></b></span>
-        </div>
+          </div>
     </a>
+            <form action="{{ url_for('index') }}" method="POST" class=" form-inline my-2 my-lg-0 " style="position: relative">
+                <select name="deb" method="GET" class=" col- btn btn-info" style="margin-right: 20px;height:60px">
+                    {% for j in range (2019,1799,-1) %}
+                        <option value="{{ j }}" SELECTED>{{ j }}</option>"
+                    {% endfor %}
+                </select>
+                <select name="fin" method="GET" class=" col- btn btn-info" style=";margin-right: 20px;height:60px ">
+                    {% for i in range (1800,2020) %}
+                        <option value="{{ i }}" SELECTED>{{ i }}</option>"
+                    {% endfor %}
+                </select>
+
+                <select name="pets" id="pet-select" class=" col- btn btn-info" style="margin-right: 20px; height:60px">
+                    <option value="eng_us_2019">eng_us_2019</option>
+                    <option value="eng_gb_2019">eng_gb_2019</option>
+                    <option value="fre_2019">fre_2019</option>
+                    <option value="spa_2019">spa_2019</option>
+                    <option value="rus_2019">rus_2019</option>
+                    <option value="ita_2019">ita_2019</option>
+                    <option value="ger_2019">ger_2019</option>
+                    <option value="eng_us_2012">eng_us_2012</option>
+                    <option value="eng_gb_2012">eng_gb_2012</option>
+                    <option value="eng_2012">eng_2012</option>
+                    <option value="eng_fiction_2012">eng_fiction_2012</option>
+                    <option value="fre_2012">fre_2012</option>
+                    <option value="spa_2012">spa_2012</option>
+                    <option value="rus_2012">rus_2012</option>
+                    <option value="ita_2012">ita_2012</option>
+                    <option value="eng_us_2009">eng_us_2009</option>
+                    <option value="eng_gb_2009">eng_gb_2009</option>
+                    <option value="eng_2009">eng_2009</option>
+                    <option value="eng_fiction_2009">eng_fiction_2009</option>
+                    <option value="fre_2009">fre_2009</option>
+                    <option value="ger_2009">ger_2009</option>
+                    <option value="rus_2009">rus_2009</option>
 
 
-    <form action="{{ url_for('index') }}" method="POST" class="form-inline" style="position: relative">
-        <select name="deb" method="GET" class="btn btn-info" style="margin-right: 20px;height:60px">
-            {% for j in range (2019,1799,-1) %}
-                <option value="{{ j }}" SELECTED>{{ j }}</option>"
-            {% endfor %}
-        </select>
-        <select name="fin" method="GET" class="btn btn-info" style=";margin-right: 20px;height:60px ">
-            {% for i in range (1800,2020) %}
-                <option value="{{ i }}" SELECTED>{{ i }}</option>"
-            {% endfor %}
-        </select>
+                </select>
 
-        <select name="pets" id="pet-select" class="btn btn-info" style="margin-right: 20px; height:60px">
-            <option value="eng_us_2019">eng_us_2019</option>
-            <option value="eng_gb_2019">eng_gb_2019</option>
-            <option value="fre_2019">fre_2019</option>
-            <option value="spa_2019">spa_2019</option>
-            <option value="rus_2019">rus_2019</option>
-            <option value="ita_2019">ita_2019</option>
-            <option value="ger_2019">ger_2019</option>
-            <option value="eng_us_2012">eng_us_2012</option>
-            <option value="eng_gb_2012">eng_gb_2012</option>
-            <option value="eng_2012">eng_2012</option>
-            <option value="eng_fiction_2012">eng_fiction_2012</option>
-            <option value="fre_2012">fre_2012</option>
-            <option value="spa_2012">spa_2012</option>
-            <option value="rus_2012">rus_2012</option>
-            <option value="ita_2012">ita_2012</option>
-            <option value="eng_us_2009">eng_us_2009</option>
-            <option value="eng_gb_2009">eng_gb_2009</option>
-            <option value="eng_2009">eng_2009</option>
-            <option value="eng_fiction_2009">eng_fiction_2009</option>
-            <option value="fre_2009">fre_2009</option>
-            <option value="ger_2009">ger_2009</option>
-            <option value="rus_2009">rus_2009</option>
+                <input class=" col- form-control mr-sm-2 bg-light" style=";margin-right: 20px;height:60px " type="search"
+                       placeholder="Search" aria-label="Search" name="nom"
+                >
+                <button class=" col- btn btn-warning" type="submit" value="submit" style=";margin-right: 20px;height:60px ">
+                    Search
+                </button>
+            </form>
 
-
-        </select>
-
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="nom"
-               style="height:60px">
-        <button class="btn btn-warning" type="submit" value="submit" style="height:60px">Search</button>
-    </form>
 
 
 </nav>
