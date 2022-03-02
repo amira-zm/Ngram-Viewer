@@ -164,7 +164,8 @@
                 ctx.save();
                 ctx.beginPath();
                 ctx.moveTo(xaxis.getPixelForValue(undefined, index), yaxis.top);
-                ctx.strokeStyle = 'black';
+                ctx.strokeStyle = '#FFC107';
+                ctx.lineWidth=3;
 
                 ctx.lineTo(xaxis.getPixelForValue(undefined, index), yaxis.bottom);
                 ctx.stroke();
@@ -190,10 +191,7 @@
                     pointColor: '#2B5C67',
                     pointHighlightStroke: '#2B5C67',
                     pointHoverBackgroundColor: '#2B5C67',
-                    pointBorderWidth: 0,
-                    pointHoverRadius: 0,
-                    pointHoverBorderWidth: 0,
-                    pointRadius: 0,
+
 
                     titleFontColor: '#333',
                     bodyFontColor: '#666',
