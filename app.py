@@ -90,11 +90,17 @@ def line2(form,corpus,deb,end):
 
     values = []
     labels = []
-    for i in range(0, len(data_vals[i])):
-        values.append(years[i])
-        labels.append(data_vals[0][i])
+    try:
+        for i in range(0, len(data_vals[i])):
+            values.append(years[i])
+            labels.append(data_vals[0][i])
+        max_value = None
+    except:
+        values=[]
+        max_value = None
+        ngrams=['Not found please verify the corpus']
 
-    max_value = None
+
 
     for num in labels:
         if (max_value is None or num > max_value):
@@ -156,8 +162,10 @@ def line2(form,corpus,deb,end):
     od = collections.OrderedDict(sorted(dic.items()))
 
     resultantList.sort()
+    shape=len(d)
+    shape1=len(values)
     print(resultantList)
-    return render_template('line_chart2.html', title='Sharbooks Ngram', d=d, max=max_value, labels=values, dic=od,
+    return render_template('line_chart2.html',shape1=shape1, title='Sharbooks Ngram',shape=shape, d=d, max=max_value, labels=values, dic=od,
                            values=labels, ngrams=ngrams[0], x=id, t=resultantList, corpus=corpus, deb=deb, end=end,
                            desc=desc, img=img, author=author, genre=genre, imdb=imdb)
 
@@ -256,10 +264,11 @@ def line(form,corpus,deb,end):
             dic[list_date[i]] = dicttt
 
     od = collections.OrderedDict(sorted(dic.items()))
-
+    shape=len(d)
     resultantList.sort()
     print(resultantList)
-    return render_template('line_chart.html', title='Sharbooks Ngram', d=d, max=max_value, labels=values, dic=od,
+    shape1=len(labels)
+    return render_template('line_chart.html',shape1=shape1, shape=shape,title='Sharbooks Ngram', d=d, max=max_value, labels=values, dic=od,
                            values=labels, ngrams=ngrams[0], x=id, t=resultantList, corpus=corpus, deb=deb, end=end,
                            desc=desc, img=img, author=author, genre=genre, imdb=imdb)
 @app.route('/line/<string:form>/<string:corpus>/<string:deb>/<string:end>/<string:id>')

@@ -35,14 +35,15 @@
             </div>
             <center>
 
-
+{% if shape1!=0 %}
                 <canvas id="myChart" width="1235" height="750"></canvas>
-
+{% endif %}
 
             </center>
 
 
         </div>
+    {% if shape!=0 %}
         <div class="col" style="padding-top: 2%">
             <div class="card">
                 <div class="card-body">
@@ -156,7 +157,7 @@
                 </div>
                 <div class="col-6 text-right">
                     <br>
-                    <a class="btn btn-info" href="#carouselExampleIndicators2" role="button"
+                    <a class="btn btn-warning" href="#carouselExampleIndicators2" role="button"
                        data-slide="prev">
                         <img src="https://img.icons8.com/ios/50/ffffff/long-arrow-left.png" width="20px"/>
                     </a>
@@ -240,7 +241,7 @@
         </div>
     </div>
 
-
+{% endif %}
 </div>
 
 
