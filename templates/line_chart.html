@@ -23,24 +23,125 @@
 <body class="bg-light">
 
 
-<div class="row" style="padding-left: 2%">
+<div class="row row-cols-2" style="padding-left: 2%">
 
     <div class="col" style="padding-top: 1.5%">
         <div class="card">
+            <div class="card-header bg-info">
+                <center>
+                    <h4 class="card-title bg-info" style="font-family: 'Comic Sans MS';"><font
+                            color="white"> {{ ngrams.title() }}</font></h4>
+                </center>
+            </div>
             <center>
-                <h2>{{ ngrams.title() }}</h2>
+
 
                 <canvas id="myChart" width="1235" height="750"></canvas>
 
-                {% for y in t %}
-                    <a href="{{ url_for('line3', form=ngrams ,corpus=corpus,deb=deb,end=end,id=y) }}">
-                        <button name="button" value="OK" type="button" class="btn btn-info">{{ labels[y] }}</button>
-                    </a>
-                {% endfor %}
 
             </center>
 
 
+        </div>
+        <div class="col" style="padding-top: 2%">
+            <div class="card">
+                <div class="card-body">
+                    <div class="content">
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="card ">
+                                    <div class="card-header bg-info">
+                                        <center>
+                                            <h4 class="card-title bg-info" style="font-family: 'Comic Sans MS';">
+                                                <font
+                                                        color="white"> Movies with this title</font></h4>
+                                        </center>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+
+                                            <table style="box-sizing: border-box;" class="table ">
+                                                <thead class=" text-info">
+                                                <tr>
+                                                    <th>
+                                                        <center>
+                                                            Release date
+                                                        </center>
+                                                    </th>
+                                                    <th>
+                                                        <center>
+                                                            Overview
+                                                        </center>
+                                                    </th>
+                                                    <th>
+                                                        <center>
+                                                            IMDB
+                                                        </center>
+                                                    </th>
+
+                                                    <th>
+                                                        <center>
+                                                            view on graph
+                                                        </center>
+                                                    </th>
+
+                                                </tr>
+
+                                                </thead>
+                                               {% for c,y in dic.items() %}
+
+
+                                                    <tr>
+
+
+                                                        <th>
+                                                            <center>
+                                                                {{ y["date"] }}
+                                                            </center>
+
+                                                        </th>
+                                                        <th>
+
+                                                                {{ y["overview"]  }}
+
+                                                        </th>
+                                                        <th>
+                                                            <center>
+                                                                <a href="https://www.imdb.com/title/{{ y["imdb"] }}/" target="_blank">
+                                                                    <button name="button" value="OK" type="button"
+                                                                            class="btn btn-warning">IMDB</button>
+                                                                </a>
+                                                            </center>
+                                                        </th>
+                                                        <th>
+                                                            <center>
+                                                                <a href="{{ url_for('line3', form=ngrams ,corpus=corpus,deb=deb,end=end,id=y["x"]) }}">
+                                                                    <button name="button" value="OK" type="button"
+                                                                            class="btn btn-light">{{ labels[y["x"]] }}</button>
+                                                                </a>
+                                                            </center>
+                                                        </th>
+
+
+                                                    </tr>
+                                                {% endfor %}
+
+
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
         </div>
 
     </div>
@@ -48,8 +149,8 @@
     <div class="col">
         <br>
         <div class="container bg-white border" style="width:382px">
-            <div class="row">
-                <div class="col-6">
+            <div class="row ">
+                <div class="col-6 ">
                     <br>
                     <h3 class="mb-3 ">Books </h3>
                 </div>
@@ -139,11 +240,13 @@
         </div>
     </div>
 
+
 </div>
+
 
 <script type='text/javascript'></script>
 <script>
-    steps = 10
+ steps = 10
     max =
     {{ max }}
 
@@ -164,8 +267,8 @@
                 ctx.save();
                 ctx.beginPath();
                 ctx.moveTo(xaxis.getPixelForValue(undefined, index), yaxis.top);
-                ctx.strokeStyle = 'black';
-
+                ctx.strokeStyle = '#FFC107';
+                ctx.lineWidth = 3;
 
                 ctx.lineTo(xaxis.getPixelForValue(undefined, index), yaxis.bottom);
                 ctx.stroke();
@@ -202,11 +305,36 @@
         options: {
             responsive: false,
             scales: {
-                yAxes: [{
+                xAxes: [{
+                    display: true,
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'years',
+                        fontColor: '#2B5C67',
+                        fontSize: 20
+                    },
                     ticks: {
-                        beginAtZero: true
+                        fontColor: "black",
+                        fontSize: 14
                     }
-                }]
+                }],
+                yAxes: [{
+                    gridLines: {
+                        zeroLineColor: 'black'
+                    }, scaleLabel: {
+
+                        display: true,
+                        labelString: 'percentage',
+                        fontColor: '#2B5C67',
+                        fontSize: 20
+                    },
+                    ticks: {
+
+                        fontColor: "black",
+                        fontSize: 14
+                    }
+                },
+                ]
             }
         }
     }

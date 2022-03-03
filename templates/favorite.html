@@ -30,19 +30,29 @@
                                             <thead class=" text-info">
                                             <tr>
                                                 <th>
-                                                    Ngram
+                                                    <center>
+                                                        Ngram
+                                                    </center>
                                                 </th>
                                                 <th>
-                                                    Start_year
+                                                    <center>
+                                                        Start_year
+                                                    </center>
                                                 </th>
                                                 <th>
-                                                    End_Year
+                                                    <center>
+                                                        End_Year
+                                                    </center>
                                                 </th>
                                                 <th>
-                                                    Corpus
+                                                    <center>
+                                                        Corpus
+                                                    </center>
                                                 </th>
                                                 <th>
-                                                    Ngram viewer
+                                                    <center>
+                                                        Ngram viewer
+                                                    </center>
                                                 </th>
                                             </tr>
 
@@ -54,30 +64,34 @@
 
 
                                                     <th>
-
-                                                        {{ t["ngram"] }}
-
-
-                                                    </th>
-                                                    <th>
-                                                        {{ t["deb"] }}
+                                                        <center>
+                                                            {{ t["ngram"] }}
+                                                        </center>
 
                                                     </th>
                                                     <th>
-                                                        {{ t["end"] }}
+                                                        <center>
+                                                            {{ t["deb"] }}</center>
 
                                                     </th>
                                                     <th>
-                                                        {{ t["corpus"] }}
+                                                        <center>
+                                                            {{ t["end"] }}</center>
 
                                                     </th>
                                                     <th>
-
-                                                        <a href="{{ url_for('line', form=t["ngram"].lower() ,corpus=t["corpus"],deb=t["deb"],end=t["end"]) }}">
-                                                            <button name="button" value="OK" type="button"
-                                                                    class="btn btn-light">view ngram
-                                                            </button>
-                                                        </a>
+                                                        <center>
+                                                            {{ t["corpus"] }}
+                                                        </center>
+                                                    </th>
+                                                    <th>
+                                                        <center>
+                                                            <a href="{{ url_for('line', form=t["ngram"].lower() ,corpus=t["corpus"],deb=t["deb"],end=t["end"]) }}">
+                                                                <button name="button" value="OK" type="button"
+                                                                        class="btn btn-light">view ngram
+                                                                </button>
+                                                            </a>
+                                                        </center>
                                                     </th>
 
 

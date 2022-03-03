@@ -2,7 +2,7 @@ from flask import Flask, render_template, flash, redirect, url_for, session, req
 import pandas as pd
 import getngrams
 import datetime
-
+import collections
 
 app = Flask(__name__)
 
@@ -70,7 +70,10 @@ def line2(form,corpus,deb,end):
     author = ''
     img = ''
     genre = ''
-    d=dict()
+    d = dict()
+    dic = {}
+    overview = []
+    di = []
     imdb = []
     ch = form.replace(" ", "") + "-" + corpus + "-" + deb + "-" + end + "-3-caseSensitive.csv"
     fin = open(ch, 'r')
@@ -98,10 +101,11 @@ def line2(form,corpus,deb,end):
             max_value = num
 
     df = pd.read_csv("final.csv")
-    ind=0
+    ind = 0
     for i in range(len(df)):
         chaine = df.iloc[i, 1][4:]
-        d1=dict()
+        d1 = dict()
+
         if (form.title() == chaine.title()):
             print(form.title(), chaine.title())
             date = df.iloc[i, 2][4:]
@@ -116,33 +120,46 @@ def line2(form,corpus,deb,end):
             if (int(datem.year) <= int(end) and int(datem.year) >= int(deb)):
                 list_date.append(x)
                 print(list_date)
+                imdb.append(df.iloc[i, 16][4:])
+                di.append(date)
+                overview.append(df.iloc[i, 18][4:])
+            print("liiiiiiiiiiiiiiiiiiiiiiiiiiiiiiste", di)
             print("liiiiiiiiiiiiiiiiiiiiiiiiiiiiiiste", list_date)
-            desc=(df.iloc[i, 14][4:])
-            img=(df.iloc[i, 15][4:])
-            author=(df.iloc[i, 9][4:])
-            genre=(df.iloc[i, 11][4:])
-            imdb=(df.iloc[i, 16][4:])
-            d1["img"]=img
-            d1["genre"] = genre
-            d1["author"]=author
-            d1["desc"] = desc
-            d[ind]=d1
-            ind+=1
 
+            desc = (df.iloc[i, 14][4:])
+            img = (df.iloc[i, 15][4:])
+            author = (df.iloc[i, 9][4:])
+            genre = (df.iloc[i, 11][4:])
+
+            d1["img"] = img
+            d1["genre"] = genre
+            d1["author"] = author
+            d1["desc"] = desc
+            d[ind] = d1
+            ind += 1
 
     for i in range(len(labels)):
         labels[i] = (labels[i] * 100) / max_value
     resultantList = []
 
-    for element in list_date:
+    for i in range(len(list_date)):
+        dicttt = {}
+        if list_date[i] not in resultantList:
+            resultantList.append(list_date[i])
 
-        if element not in resultantList:
-            resultantList.append(element)
-    print(resultantList)
+            dicttt["imdb"] = imdb[i]
+            dicttt["overview"] = overview[i]
+            dicttt["date"] = di[i]
+            dicttt["x"] = list_date[i]
+            dic[list_date[i]] = dicttt
+
+    od = collections.OrderedDict(sorted(dic.items()))
+
     resultantList.sort()
-    return render_template('line_chart2.html', title='Sharbooks Ngram', d=d,max=max_value, labels=values,values=labels,ngrams=ngrams[0],t=resultantList,corpus=corpus,deb=deb,end=end,img=img,desc=desc,author=author,genre=genre,imdb=imdb)
-
-
+    print(resultantList)
+    return render_template('line_chart2.html', title='Sharbooks Ngram', d=d, max=max_value, labels=values, dic=od,
+                           values=labels, ngrams=ngrams[0], x=id, t=resultantList, corpus=corpus, deb=deb, end=end,
+                           desc=desc, img=img, author=author, genre=genre, imdb=imdb)
 
 @app.route('/line/<string:form>/<string:corpus>/<string:deb>/<string:end>')
 
@@ -155,7 +172,10 @@ def line(form,corpus,deb,end):
     author = ''
     img = ''
     genre = ''
-    d=dict()
+    d = dict()
+    dic = {}
+    overview = []
+    di = []
     imdb = []
     ch = form.replace(" ", "") + "-" + corpus + "-" + deb + "-" + end + "-3-caseSensitive.csv"
     fin = open(ch, 'r')
@@ -183,10 +203,11 @@ def line(form,corpus,deb,end):
             max_value = num
 
     df = pd.read_csv("final.csv")
-    ind=0
+    ind = 0
     for i in range(len(df)):
         chaine = df.iloc[i, 1][4:]
-        d1=dict()
+        d1 = dict()
+
         if (form.title() == chaine.title()):
             print(form.title(), chaine.title())
             date = df.iloc[i, 2][4:]
@@ -201,32 +222,46 @@ def line(form,corpus,deb,end):
             if (int(datem.year) <= int(end) and int(datem.year) >= int(deb)):
                 list_date.append(x)
                 print(list_date)
+                imdb.append(df.iloc[i, 16][4:])
+                di.append(date)
+                overview.append(df.iloc[i, 18][4:])
+            print("liiiiiiiiiiiiiiiiiiiiiiiiiiiiiiste", di)
             print("liiiiiiiiiiiiiiiiiiiiiiiiiiiiiiste", list_date)
-            desc=(df.iloc[i, 14][4:])
-            img=(df.iloc[i, 15][4:])
-            author=(df.iloc[i, 9][4:])
-            genre=(df.iloc[i, 11][4:])
-            imdb=(df.iloc[i, 16][4:])
-            d1["img"]=img
-            d1["genre"] = genre
-            d1["author"]=author
-            d1["desc"] = desc
-            d[ind]=d1
-            ind+=1
 
+            desc = (df.iloc[i, 14][4:])
+            img = (df.iloc[i, 15][4:])
+            author = (df.iloc[i, 9][4:])
+            genre = (df.iloc[i, 11][4:])
+
+            d1["img"] = img
+            d1["genre"] = genre
+            d1["author"] = author
+            d1["desc"] = desc
+            d[ind] = d1
+            ind += 1
 
     for i in range(len(labels)):
         labels[i] = (labels[i] * 100) / max_value
     resultantList = []
 
-    for element in list_date:
+    for i in range(len(list_date)):
+        dicttt = {}
+        if list_date[i] not in resultantList:
+            resultantList.append(list_date[i])
 
-        if element not in resultantList:
-            resultantList.append(element)
-    print(resultantList)
+            dicttt["imdb"] = imdb[i]
+            dicttt["overview"] = overview[i]
+            dicttt["date"] = di[i]
+            dicttt["x"] = list_date[i]
+            dic[list_date[i]] = dicttt
+
+    od = collections.OrderedDict(sorted(dic.items()))
+
     resultantList.sort()
-    return render_template('line_chart.html', title='Sharbooks Ngram', d=d,max=max_value, labels=values,values=labels,ngrams=ngrams[0],t=resultantList,corpus=corpus,deb=deb,end=end,img=img,desc=desc,author=author,genre=genre,imdb=imdb)
-
+    print(resultantList)
+    return render_template('line_chart.html', title='Sharbooks Ngram', d=d, max=max_value, labels=values, dic=od,
+                           values=labels, ngrams=ngrams[0], x=id, t=resultantList, corpus=corpus, deb=deb, end=end,
+                           desc=desc, img=img, author=author, genre=genre, imdb=imdb)
 @app.route('/line/<string:form>/<string:corpus>/<string:deb>/<string:end>/<string:id>')
 
 def line1(form,corpus,deb,end,id):
@@ -238,6 +273,9 @@ def line1(form,corpus,deb,end,id):
     img = ''
     genre = ''
     d = dict()
+    dic = {}
+    overview = []
+    di = []
     imdb = []
     ch = form.replace(" ", "") + "-" + corpus + "-" + deb + "-" + end + "-3-caseSensitive.csv"
     fin = open(ch, 'r')
@@ -269,6 +307,7 @@ def line1(form,corpus,deb,end,id):
     for i in range(len(df)):
         chaine = df.iloc[i, 1][4:]
         d1 = dict()
+
         if (form.title() == chaine.title()):
             print(form.title(), chaine.title())
             date = df.iloc[i, 2][4:]
@@ -283,12 +322,17 @@ def line1(form,corpus,deb,end,id):
             if (int(datem.year) <= int(end) and int(datem.year) >= int(deb)):
                 list_date.append(x)
                 print(list_date)
+                imdb.append(df.iloc[i, 16][4:])
+                di.append(date)
+                overview.append(df.iloc[i, 18][4:])
+            print("liiiiiiiiiiiiiiiiiiiiiiiiiiiiiiste", di)
             print("liiiiiiiiiiiiiiiiiiiiiiiiiiiiiiste", list_date)
+
             desc = (df.iloc[i, 14][4:])
             img = (df.iloc[i, 15][4:])
             author = (df.iloc[i, 9][4:])
             genre = (df.iloc[i, 11][4:])
-            imdb = (df.iloc[i, 16][4:])
+
             d1["img"] = img
             d1["genre"] = genre
             d1["author"] = author
@@ -300,15 +344,25 @@ def line1(form,corpus,deb,end,id):
         labels[i] = (labels[i] * 100) / max_value
     resultantList = []
 
-    for element in list_date:
 
-        if element not in resultantList:
-            resultantList.append(element)
+    for i in range(len(list_date)):
+        dicttt = {}
+        if list_date[i] not in resultantList:
+            resultantList.append(list_date[i])
+
+            dicttt["imdb"] = imdb[i]
+            dicttt["overview"] = overview[i]
+            dicttt["date"] = di[i]
+            dicttt["x"] = list_date[i]
+            dic[list_date[i]] = dicttt
+
+    od = collections.OrderedDict(sorted(dic.items()))
+
     resultantList.sort()
     print(resultantList)
-    return render_template('line_chart1.html',title='Sharbooks Ngram',d=d, max=max_value, labels=values,
-                           values=labels,ngrams=ngrams[0],x=id,t=resultantList,corpus=corpus,deb=deb,end=end,desc=desc,img=img,author=author,genre=genre,imdb=imdb)
-
+    return render_template('line_chart1.html', title='Sharbooks Ngram', d=d, max=max_value, labels=values, dic=od,
+                           values=labels, ngrams=ngrams[0], x=id, t=resultantList, corpus=corpus, deb=deb, end=end,
+                           desc=desc, img=img, author=author, genre=genre, imdb=imdb)
 @app.route('/line3/<string:form>/<string:corpus>/<string:deb>/<string:end>/<string:id>')
 
 def line3(form,corpus,deb,end,id):
@@ -320,6 +374,9 @@ def line3(form,corpus,deb,end,id):
     img = ''
     genre = ''
     d = dict()
+    dic = {}
+    overview = []
+    di = []
     imdb = []
     ch = form.replace(" ", "") + "-" + corpus + "-" + deb + "-" + end + "-3-caseSensitive.csv"
     fin = open(ch, 'r')
@@ -351,6 +408,7 @@ def line3(form,corpus,deb,end,id):
     for i in range(len(df)):
         chaine = df.iloc[i, 1][4:]
         d1 = dict()
+
         if (form.title() == chaine.title()):
             print(form.title(), chaine.title())
             date = df.iloc[i, 2][4:]
@@ -365,12 +423,17 @@ def line3(form,corpus,deb,end,id):
             if (int(datem.year) <= int(end) and int(datem.year) >= int(deb)):
                 list_date.append(x)
                 print(list_date)
+                imdb.append(df.iloc[i, 16][4:])
+                di.append(date)
+                overview.append(df.iloc[i, 18][4:])
+            print("liiiiiiiiiiiiiiiiiiiiiiiiiiiiiiste", di)
             print("liiiiiiiiiiiiiiiiiiiiiiiiiiiiiiste", list_date)
+
             desc = (df.iloc[i, 14][4:])
             img = (df.iloc[i, 15][4:])
             author = (df.iloc[i, 9][4:])
             genre = (df.iloc[i, 11][4:])
-            imdb = (df.iloc[i, 16][4:])
+
             d1["img"] = img
             d1["genre"] = genre
             d1["author"] = author
@@ -382,15 +445,26 @@ def line3(form,corpus,deb,end,id):
         labels[i] = (labels[i] * 100) / max_value
     resultantList = []
 
-    for element in list_date:
 
-        if element not in resultantList:
-            resultantList.append(element)
+    for i in range(len(list_date)):
+        dicttt = {}
+        if list_date[i] not in resultantList:
+            resultantList.append(list_date[i])
+
+            dicttt["imdb"] = imdb[i]
+            dicttt["overview"] = overview[i]
+            dicttt["date"] = di[i]
+            dicttt["x"] =list_date[i]
+            dic[list_date[i]] = dicttt
+
+
+    od = collections.OrderedDict(sorted(dic.items()))
+
     resultantList.sort()
     print(resultantList)
-    return render_template('line_chart3.html',title='Sharbooks Ngram',d=d, max=max_value, labels=values,
-                           values=labels,ngrams=ngrams[0],x=id,t=resultantList,corpus=corpus,deb=deb,end=end,desc=desc,img=img,author=author,genre=genre,imdb=imdb)
-
+    return render_template('line_chart3.html', title='Sharbooks Ngram', d=d, max=max_value, labels=values, dic=od,
+                           values=labels, ngrams=ngrams[0], x=id, t=resultantList, corpus=corpus, deb=deb, end=end,
+                           desc=desc, img=img, author=author, genre=genre, imdb=imdb)
 
 
 if __name__ == '__main__':
