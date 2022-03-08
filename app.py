@@ -3,7 +3,7 @@ import pandas as pd
 import getngrams
 import datetime
 import collections
-
+# from ipynb.fs.full.similarity import similar
 app = Flask(__name__)
 
 # Import writer class from csv module
@@ -49,14 +49,33 @@ def index():
 def fovorite():
     events= pd.read_csv ('event.csv')
 
+    rec = events.groupby(events.columns.tolist()).size().reset_index().rename(columns={0: 'records'})
+    records = rec.sort_values(by=['records'], ascending=False)
+    records = records.head(10)
+    labels=list(records['ngram'])
+    values=list(records['records'])
+    colors = [
+        "#F7464A", "#46BFBD", "#FDB45C", "#FEDCBA",
+        "#ABCDEF", "#DDDDDD", "#ABCABC", "#4169E1",
+        "#C71585", "#FF4500", "#FEDCBA", "#46BFBD"]
+    return render_template("favorite.html",records=records, set=zip(values, labels, colors))
+@app.route('/favorite1')
+def fovorite1():
+    events= pd.read_csv ('event.csv')
+
     rec=events.groupby(events.columns.tolist()).size().reset_index().rename(columns={0: 'records'})
-    records = rec.head(10)
+    records = rec.sort_values(by=['records'], ascending=False)
+    records = records.head(10)
     records.to_csv("ev.csv")
+    labels=list(records['ngram'])
+    values=list(records['records'])
+    colors = [
+        "#F7464A", "#46BFBD", "#FDB45C", "#FEDCBA",
+        "#ABCDEF", "#DDDDDD", "#ABCABC", "#4169E1",
+        "#C71585", "#FF4500", "#FEDCBA", "#46BFBD"]
+    return render_template("_chart.html",records=records, set=zip(values, labels, colors))
 
 
-
-
-    return render_template("favorite.html",records=records)
 
 
 @app.route('/line/<string:form>/<string:corpus>/<string:deb>/<string:end>')
@@ -165,6 +184,7 @@ def line2(form,corpus,deb,end):
     shape=len(d)
     shape1=len(values)
     print(resultantList)
+
     return render_template('line_chart2.html',shape1=shape1, title='Sharbooks Ngram',shape=shape, d=d, max=max_value, labels=values, dic=od,
                            values=labels, ngrams=ngrams[0], x=id, t=resultantList, corpus=corpus, deb=deb, end=end,
                            desc=desc, img=img, author=author, genre=genre, imdb=imdb)

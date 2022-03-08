@@ -7,7 +7,7 @@
                 style="color: #F6BE00"><b></b></b></span>
           </div>
     </a>
-            <form action="{{ url_for('index') }}" method="POST" class=" form-inline my-2 my-lg-0 " style="position: relative">
+            <form action="{{url_for('index')}}" method="POST" class=" form-inline my-2 my-lg-0 " style="position: relative">
                 <select name="deb" method="GET" class=" col- btn btn-info" style="margin-right: 20px;height:60px">
                     {% for j in range (2019,1799,-1) %}
                         <option value="{{ j }}" SELECTED>{{ j }}</option>"
