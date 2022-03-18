@@ -3,7 +3,7 @@ import pandas as pd
 import getngrams
 import datetime
 import collections
-# from ipynb.fs.full.similarity import similar
+from similar import similarBooks
 app = Flask(__name__)
 
 # Import writer class from csv module
@@ -16,6 +16,7 @@ from csv import writer
 
 @app.route('/',methods=['GET','POST'])
 def index():
+
     if request.method == 'POST':
         form = request.form["nom"].lower()
         corpus =request.form["pets"]
@@ -59,6 +60,35 @@ def fovorite():
         "#ABCDEF", "#DDDDDD", "#ABCABC", "#4169E1",
         "#C71585", "#FF4500", "#FEDCBA", "#46BFBD"]
     return render_template("favorite.html",records=records, set=zip(values, labels, colors))
+@app.route('/pedictif',methods=['GET','POST'])
+def predictif():
+    if request.method == 'POST':
+        form = request.form["nom"].lower()
+
+        return redirect(url_for('trending_chart', form=form))
+
+
+    return render_template("predictif.html")
+@app.route('/trends/<string:form>')
+def trending_chart(form):
+    from pytrends.request import TrendReq
+
+    pytrends = TrendReq()
+    kw_list = [form]  # list of keywords to get data
+
+    pytrends.build_payload(kw_list, cat=0, timeframe='2004-01-01 2022-03-16', geo="FR")
+    data = pytrends.interest_over_time()
+    data = data.reset_index()
+    x=list(data["date"])
+    values= list(data[form])
+    labels=[]
+    for e in x:
+        labels.append(str(e))
+    max=100
+
+    return render_template("includes/_trending_chart.html",form=form,labels=labels,values=values,max=max)
+
+
 @app.route('/favorite1')
 def fovorite1():
     events= pd.read_csv ('event.csv')
@@ -82,6 +112,7 @@ def fovorite1():
 
 
 def line2(form,corpus,deb,end):
+    isbn = ''
     list_date = []
     poster_path = "https://image.tmdb.org/t/p/original/"
     date = "1800-01-15"
@@ -109,17 +140,11 @@ def line2(form,corpus,deb,end):
 
     values = []
     labels = []
-    try:
-        for i in range(0, len(data_vals[i])):
-            values.append(years[i])
-            labels.append(data_vals[0][i])
-        max_value = None
-    except:
-        values=[]
-        max_value = None
-        ngrams=['Not found please verify the corpus']
+    for i in range(0, len(data_vals[i])):
+        values.append(years[i])
+        labels.append(data_vals[0][i])
 
-
+    max_value = None
 
     for num in labels:
         if (max_value is None or num > max_value):
@@ -152,10 +177,11 @@ def line2(form,corpus,deb,end):
             print("liiiiiiiiiiiiiiiiiiiiiiiiiiiiiiste", list_date)
 
             desc = (df.iloc[i, 14][4:])
-            img = (df.iloc[i, 15][4:])
+            img = str((df.iloc[i, 15][4:]))
             author = (df.iloc[i, 9][4:])
             genre = (df.iloc[i, 11][4:])
-
+            isbn = (df.iloc[i, 10][4:])
+            d1["isbn"] = isbn
             d1["img"] = img
             d1["genre"] = genre
             d1["author"] = author
@@ -179,13 +205,18 @@ def line2(form,corpus,deb,end):
             dic[list_date[i]] = dicttt
 
     od = collections.OrderedDict(sorted(dic.items()))
-
+    shape = len(d)
     resultantList.sort()
-    shape=len(d)
-    shape1=len(values)
     print(resultantList)
+    shape1 = len(labels)
 
-    return render_template('line_chart2.html',shape1=shape1, title='Sharbooks Ngram',shape=shape, d=d, max=max_value, labels=values, dic=od,
+    try:
+        similar_books = similarBooks(form.title())
+    except:
+        similar_books = {}
+    fff=len(similar_books)
+
+    return render_template('line_chart2.html',fff=fff,similar_books=similar_books,shape1=shape1, title='Sharbooks Ngram',shape=shape, d=d, max=max_value, labels=values, dic=od,
                            values=labels, ngrams=ngrams[0], x=id, t=resultantList, corpus=corpus, deb=deb, end=end,
                            desc=desc, img=img, author=author, genre=genre, imdb=imdb)
 
@@ -193,6 +224,7 @@ def line2(form,corpus,deb,end):
 
 
 def line(form,corpus,deb,end):
+    isbn = ''
     list_date = []
     poster_path = "https://image.tmdb.org/t/p/original/"
     date = "1800-01-15"
@@ -260,7 +292,8 @@ def line(form,corpus,deb,end):
             img = (df.iloc[i, 15][4:])
             author = (df.iloc[i, 9][4:])
             genre = (df.iloc[i, 11][4:])
-
+            isbn = (df.iloc[i, 10][4:])
+            d1["isbn"] = isbn
             d1["img"] = img
             d1["genre"] = genre
             d1["author"] = author
@@ -284,11 +317,20 @@ def line(form,corpus,deb,end):
             dic[list_date[i]] = dicttt
 
     od = collections.OrderedDict(sorted(dic.items()))
-    shape=len(d)
+    shape = len(d)
     resultantList.sort()
     print(resultantList)
-    shape1=len(labels)
-    return render_template('line_chart.html',shape1=shape1, shape=shape,title='Sharbooks Ngram', d=d, max=max_value, labels=values, dic=od,
+    shape1 = len(labels)
+
+    try:
+        similar_books = similarBooks(form.title())
+    except:
+        similar_books = {}
+
+    fff=len(similar_books)
+
+
+    return render_template('line_chart.html',fff=fff,similar_books=similar_books,shape1=shape1, shape=shape,title='Sharbooks Ngram', d=d, max=max_value, labels=values, dic=od,
                            values=labels, ngrams=ngrams[0], x=id, t=resultantList, corpus=corpus, deb=deb, end=end,
                            desc=desc, img=img, author=author, genre=genre, imdb=imdb)
 @app.route('/line/<string:form>/<string:corpus>/<string:deb>/<string:end>/<string:id>')

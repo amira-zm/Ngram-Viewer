@@ -35,219 +35,412 @@
             </div>
             <center>
 
-{% if shape1!=0 %}
-                <canvas id="myChart" width="1235" height="750"></canvas>
-{% endif %}
+                {% if shape1!=0 %}
+                    <canvas id="myChart" width="1235" height="750"></canvas>
+                {% endif %}
 
             </center>
 
 
         </div>
-    {% if shape!=0 %}
-        <div class="col" style="padding-top: 2%">
-            <div class="card">
-                <div class="card-body">
-                    <div class="content">
 
-                        <div class="row">
-                            <div class="col">
-                                <div class="card ">
-                                    <div class="card-header bg-info">
-                                        <center>
-                                            <h4 class="card-title bg-info" style="font-family: 'Comic Sans MS';">
-                                                <font
-                                                        color="white"> Movies with this title</font></h4>
-                                        </center>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="table-responsive">
+        {% if shape!=0 %}
+            <div class="col" style="padding-top: 2%">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="content">
 
-                                            <table style="box-sizing: border-box;" class="table ">
-                                                <thead class=" text-info">
-                                                <tr>
-                                                    <th>
-                                                        <center>
-                                                            Release date
-                                                        </center>
-                                                    </th>
-                                                    <th>
-                                                        <center>
-                                                            Overview
-                                                        </center>
-                                                    </th>
-                                                    <th>
-                                                        <center>
-                                                            IMDB
-                                                        </center>
-                                                    </th>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card ">
+                                        <div class="card-header bg-info">
+                                            <center>
+                                                <h4 class="card-title bg-info" style="font-family: 'Comic Sans MS';">
+                                                    <font
+                                                            color="white"> Movies with this title</font></h4>
+                                            </center>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="table-responsive">
 
-                                                    <th>
-                                                        <center>
-                                                            view on graph
-                                                        </center>
-                                                    </th>
-
-                                                </tr>
-
-                                                </thead>
-                                               {% for c,y in dic.items() %}
-
-
+                                                <table style="box-sizing: border-box;" class="table ">
+                                                    <thead class=" text-info">
                                                     <tr>
-
-
                                                         <th>
                                                             <center>
-                                                                {{ y["date"] }}
-                                                            </center>
-
-                                                        </th>
-                                                        <th>
-
-                                                                {{ y["overview"]  }}
-
-                                                        </th>
-                                                        <th>
-                                                            <center>
-                                                                <a href="https://www.imdb.com/title/{{ y["imdb"] }}/" target="_blank">
-                                                                    <button name="button" value="OK" type="button"
-                                                                            class="btn btn-warning">IMDB</button>
-                                                                </a>
+                                                                Release date
                                                             </center>
                                                         </th>
                                                         <th>
                                                             <center>
-                                                                <a href="{{ url_for('line3', form=ngrams ,corpus=corpus,deb=deb,end=end,id=y["x"]) }}">
-                                                                    <button name="button" value="OK" type="button"
-                                                                            class="btn btn-light">{{ labels[y["x"]] }}</button>
-                                                                </a>
+                                                                Overview
+                                                            </center>
+                                                        </th>
+                                                        <th>
+                                                            <center>
+                                                                IMDB
                                                             </center>
                                                         </th>
 
+                                                        <th>
+                                                            <center>
+                                                                view on graph
+                                                            </center>
+                                                        </th>
 
                                                     </tr>
-                                                {% endfor %}
+
+                                                    </thead>
+                                                    {% for c,y in dic.items() %}
 
 
-                                            </table>
+                                                        <tr>
 
+
+                                                            <th>
+                                                                <center>
+                                                                    {{ y["date"] }}
+                                                                </center>
+
+                                                            </th>
+                                                            <th>
+
+                                                                {{ y["overview"] }}
+
+                                                            </th>
+                                                            <th>
+                                                                <center>
+                                                                    <a href="https://www.imdb.com/title/{{ y["imdb"] }}/"
+                                                                       target="_blank">
+                                                                        <button name="button" value="OK" type="button"
+                                                                                class="btn btn-warning">IMDB
+                                                                        </button>
+                                                                    </a>
+                                                                </center>
+                                                            </th>
+                                                            <th>
+                                                                <center>
+                                                                    <a href="{{ url_for('line3', form=ngrams ,corpus=corpus,deb=deb,end=end,id=y["x"]) }}">
+                                                                        <button name="button" value="OK" type="button"
+                                                                                class="btn btn-light">{{ labels[y["x"]] }}</button>
+                                                                    </a>
+                                                                </center>
+                                                            </th>
+
+
+                                                        </tr>
+                                                    {% endfor %}
+
+
+                                                </table>
+
+                                            </div>
                                         </div>
                                     </div>
+
+
                                 </div>
-
-
                             </div>
+
                         </div>
 
                     </div>
-
                 </div>
             </div>
-        </div>
+            <div class="col" style="padding-top: 2%">
+                <div class="card">
+                    <div class="card-header bg-info">
+                        <center>
+                            <h4 class="card-title bg-info" style="font-family: 'Comic Sans MS';"><font
+                                    color="white">Similar Books </font></h4>
+                        </center>
+                    </div>
+                    <div class="card-body">
 
-    </div>
-
-    <div class="col">
-        <br>
-        <div class="container bg-white border" style="width:382px">
-            <div class="row ">
-                <div class="col-6 ">
-                    <br>
-                    <h3 class="mb-3 ">Books </h3>
-                </div>
-                <div class="col-6 text-right">
-                    <br>
-                    <a class="btn btn-warning" href="#carouselExampleIndicators2" role="button"
-                       data-slide="prev">
-                        <img src="https://img.icons8.com/ios/50/ffffff/long-arrow-left.png" width="20px"/>
-                    </a>
-                    <a class="btn btn-info" href="#carouselExampleIndicators2" role="button" data-slide="next">
-                        <img src="https://img.icons8.com/ios/50/ffffff/long-arrow-right.png" width="20px"/>
-                    </a>
-                </div>
-                <div class="col-12">
-                    <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
-
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <div class="row">
-
-
-                                    <div class="card bg-white">
-                                        <center>
-                                            <img class="img-fluid" style="width: 250px;height: 310px"
-                                                 src="{{ d[0]["img"] }}">
-                                        </center>
-                                        <div class="card-body bg-white">
-                                            <h4 class="card-title">{{ ngrams }}</h4>
-
-                                            <ul class="list-group list-group-flush bg-light">
-                                                <li class="list-group-item bg-white"><b>Authors</b>
-                                                    <p>{{ d[0]["author"] }}</p>
-                                                </li>
-                                                <li class="list-group-item bg-white"><b>Genres</b>
-                                                    <p>{{ d[0]["genre"] }}</p>
-                                                </li>
-                                                <li class="list-group-item bg-white"><b>Description</b></li>
-                                            </ul>
-                                            <p class="card-text">{{ d[0]["desc"] }}</p>
-
-                                        </div>
-
-
-                                    </div>
+                        <div class="container bg-white border" style="width:382px">
+                            <div class="row ">
+                                <div class="col-6 ">
+                                    <br>
+                                    <h3 class="mb-3 ">Books </h3>
                                 </div>
-                            </div>
-                            {% for c,y in d.items() %}
-                                {% if c!= 0 %}
-                                    <div class="carousel-item">
-                                        <div class="row">
+                                <div class="col-6 text-right">
+                                    <br>
+                                    <a class="btn btn-warning" href="#carouselExampleIndicators2" role="button"
+                                       data-slide="prev">
+                                        <img src="https://img.icons8.com/ios/50/ffffff/long-arrow-left.png"
+                                             width="20px"/>
+                                    </a>
+                                    <a class="btn btn-info" href="#carouselExampleIndicators2" role="button"
+                                       data-slide="next">
+                                        <img src="https://img.icons8.com/ios/50/ffffff/long-arrow-right.png"
+                                             width="20px"/>
+                                    </a>
+                                </div>
+                                {% if fff!=0 %}
+                                <div class="col-12">
+                                    <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
+
+                                        <div class="carousel-inner">
+                                            <div class="carousel-item active">
+                                                <div class="row">
 
 
-                                            <div class="card  bg-white border">
-                                                <center>
-                                                    <br>
-                                                    <img class="img-fluid" style="width: 250px;height: 310px"
-                                                         src="{{ y["img"] }}">
-                                                </center>
-                                                <div class="card-body bg-white ">
-                                                    <h4 class="card-title bg-white ">{{ ngrams }}</h4>
-                                                    <ul class="list-group list-group-flush bg-white ">
-                                                        <li class="list-group-item bg-white"><b>Authors</b>
-                                                            <p>{{ y["author"] }}</p>
-                                                        </li>
-                                                        <li class="list-group-item bg-white"><b>Genres</b>
-                                                            <p>{{ y["genre"] }}</p>
-                                                        </li>
-                                                        <li class="list-group-item bg-white"><b>Description</b></li>
-                                                    </ul>
-                                                    <p class="card-text">{{ y["desc"] }}</p>
+                                                    <div class="card bg-white">
+                                                        <center>
+                                                            <img class="img-fluid" style="width: 250px;height: 310px"
+                                                                 src=" {{ similar_books["image"][0] }} ">
+                                                        </center>
+                                                        <div class="card-body bg-white">
+                                                            <h4 class="card-title">{{ similar_books["Title"][0] }}</h4>
+
+                                                            <ul class="list-group list-group-flush bg-light">
+                                                                <li class="list-group-item bg-white"><b>Similarity</b>
+                                                                    <p>{{ similar_books["Similarity"][0] }}</p>
+                                                                </li>
+                                                            </ul>
+
+
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="carousel-item">
+                                                <div class="row">
+
+                                                    <div class="col">
+
+
+                                                        <div class="card  bg-white border">
+                                                            <center>
+                                                                <br>
+                                                                <img class="img-fluid"
+                                                                     style="width: 250px;height: 310px"
+                                                                     src="{{ similar_books["image"][1] }}">
+                                                            </center>
+                                                            <div class="card-body bg-white ">
+                                                                <h4 class="card-title bg-white ">{{ similar_books["Title"][1] }}</h4>
+                                                                <ul class="list-group list-group-flush bg-white ">
+                                                                    <li class="list-group-item bg-white"><b>Authors</b>
+                                                                        <p>{{ similar_books["Similarity"][1] }}</p>
+                                                                    </li>
+
+                                                                </ul>
+
+
+                                                            </div>
+
+
+                                                        </div>
+                                                    </div>
 
                                                 </div>
+                                            </div>
+                                            <div class="carousel-item">
+                                                <div class="row">
+
+                                                    <div class="col">
+
+                                                        <div class="card  bg-white border">
+                                                            <center>
+                                                                <br>
+                                                                <img class="img-fluid"
+                                                                     style="width: 250px;height: 310px"
+                                                                     src="{{ similar_books["image"][2] }}">
+                                                            </center>
+                                                            <div class="card-body bg-white ">
+                                                                <h4 class="card-title bg-white ">{{ similar_books["Title"][2] }}</h4>
+                                                                <ul class="list-group list-group-flush bg-white ">
+                                                                    <li class="list-group-item bg-white"><b>Authors</b>
+                                                                        <p>{{ similar_books["Similarity"][2] }}</p>
+                                                                    </li>
+
+                                                                </ul>
 
 
+                                                            </div>
+
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="carousel-item">
+                                                <div class="row">
+
+
+                                                    <div class="card  bg-white border">
+                                                        <center>
+                                                            <br>
+                                                            <img class="img-fluid" style="width: 250px;height: 310px"
+                                                                 src="{{ similar_books["image"][3] }}">
+                                                        </center>
+                                                        <div class="card-body bg-white ">
+                                                            <h4 class="card-title bg-white ">{{ similar_books["Title"][3] }}</h4>
+                                                            <ul class="list-group list-group-flush bg-white ">
+                                                                <li class="list-group-item bg-white"><b>Authors</b>
+                                                                    <p>{{ similar_books["Similarity"][3] }}</p>
+                                                                </li>
+
+                                                            </ul>
+
+
+                                                        </div>
+
+
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                            <div class="carousel-item">
+                                                <div class="row">
+
+
+                                                    <div class="card  bg-white border">
+                                                        <center>
+                                                            <br>
+                                                            <img class="img-fluid" style="width: 250px;height: 310px"
+                                                                 src="{{ similar_books["image"][4] }}">
+                                                        </center>
+                                                        <div class="card-body bg-white ">
+                                                            <h4 class="card-title bg-white ">{{ similar_books["Title"][4] }}</h4>
+                                                            <ul class="list-group list-group-flush bg-white ">
+                                                                <li class="list-group-item bg-white"><b>Authors</b>
+                                                                    <p>{{ similar_books["Similarity"][4] }}</p>
+                                                                </li>
+
+                                                            </ul>
+
+
+                                                        </div>
+
+
+                                                    </div>
+
+
+                                                </div>
                                             </div>
 
 
                                         </div>
                                     </div>
-                                {% endif %}
-                            {% endfor %}
+                                </div>
+                                    {% endif %}
+                            </div>
+                        </div>
 
+                    </div>
+                </div>
+            </div>
+            </div>
+
+            <div class="col">
+                <br>
+                <div class="container bg-white border" style="width:382px">
+                    <div class="row ">
+                        <div class="col-6 ">
+                            <br>
+                            <h3 class="mb-3 ">Books </h3>
+                        </div>
+                        <div class="col-6 text-right">
+                            <br>
+                            <a class="btn btn-warning" href="#carouselExampleIndicators2" role="button"
+                               data-slide="prev">
+                                <img src="https://img.icons8.com/ios/50/ffffff/long-arrow-left.png" width="20px"/>
+                            </a>
+                            <a class="btn btn-info" href="#carouselExampleIndicators2" role="button" data-slide="next">
+                                <img src="https://img.icons8.com/ios/50/ffffff/long-arrow-right.png" width="20px"/>
+                            </a>
+                        </div>
+                        <div class="col-12">
+                            <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
+
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <div class="row">
+
+
+                                            <div class="card bg-white">
+                                                <center>
+                                                    <img class="img-fluid" style="width: 250px;height: 310px"
+                                                         src="{{ d[0]["img"] }}">
+                                                </center>
+                                                <div class="card-body bg-white">
+                                                    <h4 class="card-title">{{ ngrams }}</h4>
+
+                                                    <ul class="list-group list-group-flush bg-light">
+                                                        <li class="list-group-item bg-white"><b>Authors</b>
+                                                            <p>{{ d[0]["author"] }}</p>
+                                                        </li>
+                                                        <li class="list-group-item bg-white"><b>Genres</b>
+                                                            <p>{{ d[0]["genre"] }}</p>
+                                                        </li>
+                                                        <li class="list-group-item bg-white"><b>Description</b></li>
+                                                    </ul>
+                                                    <p class="card-text">{{ d[0]["desc"] }}</p>
+
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% for c,y in d.items() %}
+                                        {% if c!= 0 %}
+                                            <div class="carousel-item">
+                                                <div class="row">
+
+
+                                                    <div class="card  bg-white border">
+                                                        <center>
+                                                            <br>
+                                                            <img class="img-fluid" style="width: 250px;height: 310px"
+                                                                 src="{{ y["img"] }}">
+                                                        </center>
+                                                        <div class="card-body bg-white ">
+                                                            <h4 class="card-title bg-white ">{{ ngrams }}</h4>
+                                                            <ul class="list-group list-group-flush bg-white ">
+                                                                <li class="list-group-item bg-white"><b>Authors</b>
+                                                                    <p>{{ y["author"] }}</p>
+                                                                </li>
+                                                                <li class="list-group-item bg-white"><b>Genres</b>
+                                                                    <p>{{ y["genre"] }}</p>
+                                                                </li>
+                                                                <li class="list-group-item bg-white"><b>Description</b>
+                                                                </li>
+                                                            </ul>
+                                                            <p class="card-text">{{ y["desc"] }}</p>
+
+                                                        </div>
+
+
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-{% endif %}
+        {% endif %}
 </div>
 
 
 <script type='text/javascript'></script>
 <script>
- steps = 10
+    steps = 10
     max =
     {{ max }}
 
