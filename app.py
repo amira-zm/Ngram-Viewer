@@ -17,6 +17,7 @@ from csv import writer
 @app.route('/',methods=['GET','POST'])
 def index():
 
+
     if request.method == 'POST':
         form = request.form["nom"].lower()
         corpus =request.form["pets"]
@@ -42,8 +43,21 @@ def index():
 
         getngrams.runQuery(ch1)
 
-        return redirect(url_for('line2', form=form ,corpus=corpus,deb=deb,end=end))
 
+        return redirect(url_for('line2', form=form ,corpus=corpus,deb=deb,end=end))
+    import cv2
+    from pyzbar.pyzbar import decode
+    cap = cv2.VideoCapture(0)
+    cap.set(3, 640)
+    cap.set(4, 480)
+    camera = True
+    while camera == True:
+        success, frame = cap.read()
+        for code in decode(frame):
+            print(code.data.decode('utf-8'))
+            camera = False
+        cv2.imshow('testing-code-scan', frame)
+        cv2.waitKey(1)
     return render_template("home.html")
 
 @app.route('/favorite')
